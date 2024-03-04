@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>omor</p>
-</body>
-</html>
+<?php
+require("functions.php");
+
+$dns = "mysql:host=localhost;port=3306;dbname=blogs_kristians_mikelsons;user=root;password=;charset=utf8mb4";
+
+$connect = new PDO($dns);
+
+$query = $connect->query("SELECT * FROM posts");
+
+$posts = $query->fetchAll(PDO::FETCH_ASSOC);
+$json = json_encode($posts);
+header('Content-Type: application/json');
+
+echo $json;
